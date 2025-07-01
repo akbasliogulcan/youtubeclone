@@ -40,3 +40,20 @@
 .read-the-docs {
   color: #888;
 }
+
+.page-content {
+  background-color: red;
+  max-width: 1600px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: auto 400px;
+  gap: 40px;
+  padding: 40px 60px;
+}
+
+@media (max-width: 1200px) {
+  .page-content {
+    grid-template-columns: 1fr;
+    padding: 30px 20px;
+  }
+}

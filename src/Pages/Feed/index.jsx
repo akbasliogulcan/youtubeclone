@@ -3,6 +3,7 @@ import Sidebar from "../../Components/Sidebar";
 import { useSearchParams } from "react-router-dom";
 import api from "../../utils/api"; //*api: Api isteklerini yönetmek için kullanılan bir araçtır.
 import VideoCard from "../../Components/Videocard";
+import SkeletonLoader from "../../Components/Loader";
 const Feed = () => {
   //*State kurulumları
   let [videos, setVideos] = useState([]);
@@ -28,7 +29,7 @@ const Feed = () => {
       .catch((err) => setError(err.message)) //*hata olursa
       .finally(() => setIsLoading(false)); //*her durumda isLoading false olacak
   }, [selectedCategory]); //*selectedCategory değiştiğinde useEffect tetiklenecek
-
+  console.log(videos);
   //*Gelen  video verisi içinde type'ı "video" olanları filtrele
   videos = videos.filter((video) => video.type === "video");
 
@@ -38,9 +39,9 @@ const Feed = () => {
       <div className="videos">
         {/* isloading ise yükleniyor,  hata varsa hata, bunların hiçbiri yoksa videoları map'le. */}
         {isLoading ? (
-          <h1>loading</h1>
+          <SkeletonLoader />
         ) : error ? (
-          <h1>Error</h1>
+          <Error info={error} />
         ) : (
           videos.map((video, key) => <VideoCard key={key} video={video} />)
         )}
